@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+    
+    {% block title %}Login LFAweb{% endblock %}
+    
+    {% block extrahead %}
+
+    <style>
+        * {
+            font-family:Verdana, Arial, Trebuchet ms;
+            font-size:12px;
+        }
+        .easy-login .icon-loading {
+            background: transparent url(/apps/login/static/img/loading.gif) no-repeat 1px 2px;
+        }
+
+ 
+    </style>
+    
+    {% endblock %}
+
+    
+    {% block content %}
+         <center>
+         {% block branding %}
+         <br><br>
+            <span class="menulogo">Bienvenue sur LFAweb</span>
+         <br><br>
+        {% endblock %}
+        
+        <div id="test"></div>
+        
+        <div id="login"></div>
+               
+        <div style="color:darkgrey;font-size:10px">
+            powered by <a style="color:darkgrey;font-size:10px"  href='http://www.revolunet.com' target='_blank'>revolunet.com</a> ©2009
+        </div>
+        <script type="text/javascript" src="/apps/login/static/js/Ext.ux.EasyLogin.js"></script>
+        <script type="text/javascript">
+        Ext.onReady(function() {
+
+            Ext.QuickTips.init();
+
+            var form = new Ext.ux.EasyLogin({
+               renderTo:'login'
+               ,username:'{{ username }}'
+            });
+
+            form.render("login");
+            
+            
+ 
+               
+  
+    });
+
+    </script>
+    </center>
+    
+    {% endblock %}
