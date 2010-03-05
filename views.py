@@ -24,7 +24,7 @@ def default(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                resp = utils.JsonSuccess({'redirect':'/'  })
+                resp = utils.JsonSuccess({'redirect':request.GET.get('next', '/')  })
                 resp = utils.set_cookie(resp, 'username', user.username)
                 return resp
             else:

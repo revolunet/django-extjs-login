@@ -150,8 +150,10 @@ Ext.ux.EasyLogin = Ext.extend(Ext.form.FormPanel, {
       //  this.submitButton = btn;
         this.submitButton.disable();
         this.submitButton.setIconClass("icon-loading");
+        var next = window.location.search ? Ext.urlDecode(window.location.search.substring(1)).next : '';
+                 
         this.getForm().submit({
-                url:"/apps/login"
+                url:"/apps/login?next=" + next
                 ,scope:this
                 ,success:this.submitLoginCallback
                 ,failure:this.submitLoginCallback
