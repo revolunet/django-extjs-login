@@ -26,6 +26,7 @@ def default(request):
                 login(request, user)
                 resp = utils.JsonSuccess({'redirect':request.GET.get('next', '/')  })
                 resp = utils.set_cookie(resp, 'username', user.username)
+                resp = utils.set_cookie(resp, 'email', user.email)
                 return resp
             else:
                 # Return a 'disabled account' error message
@@ -35,6 +36,7 @@ def default(request):
             return utils.JsonError("Mauvais utilisateur ou mot de passe")  
     params = {}
     params['username'] = utils.get_cookie(request, 'username') or ''
+    params['email'] = utils.get_cookie(request, 'email') or ''
     response = render_to_response('login.html', params, context_instance=RequestContext(request))
     return response
 
@@ -71,6 +73,8 @@ def changepassword(request):
             return utils.JsonSuccess()
     return utils.JsonError('Les mots de passe ne correspondent pas')
     
+ 
+   
    
    
 @publish
@@ -82,8 +86,8 @@ def resetpassword(request):
             newpass =  User.objects.make_random_password(length=8)
             u.set_password(newpass)
             u.save()
-            message = u'Votre mot de passe LFAweb a été réinitialisé : %s \n\n%s' % (newpass, settings.HOST) 
-            u.email_user('Nouveau mot de passe LFAweb', message)
+            message = u'Votre mot de passe EasyDemo a été réinitialisé : %s \n\n%s' % (newpass, settings.HOST) 
+            u.email_user('Nouveau mot de passe EasyDemo', message)
             # auto log user
             backend = get_backends()[0]
             u.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
@@ -98,8 +102,8 @@ def lostpassword(request):
             u = User.objects.get(email = request.POST['email'])
             token = user_token(u)
             link = '%s/apps/login/resetpassword?a=%s&t=%s' % (settings.HOST, u.pk, token)
-            message = u'Vous avez demandé à réinitialiser votre mot de passe LFAweb.\n\nCliquez ici pour le réinitialiser : %s\n\n%s\n\nOrigine de la demande : %s' % (link, settings.HOST, request.META.get('REMOTE_ADDR', '?'))
-            u.email_user('Mot de passe LFAweb', message)
+            message = u'Vous avez demandé à réinitialiser votre mot de passe EasyDemo.\n\nCliquez ici pour le réinitialiser : %s\n\n%s\n\nOrigine de la demande : %s' % (link, settings.HOST, request.META.get('REMOTE_ADDR', '?'))
+            u.email_user('Mot de passe EasyDemo', message)
             return utils.JsonSuccess()  
         except:
             return utils.JsonError("Email inconnu")  
