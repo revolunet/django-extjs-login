@@ -86,8 +86,8 @@ def resetpassword(request):
             newpass =  User.objects.make_random_password(length=8)
             u.set_password(newpass)
             u.save()
-            message = u'Votre mot de passe EasyDemo a été réinitialisé : %s \n\n%s' % (newpass, settings.HOST) 
-            u.email_user('Nouveau mot de passe EasyDemo', message)
+            message = u'Votre mot de passe eDemo.fr a été réinitialisé : %s \n\n%s' % (newpass, settings.HOST) 
+            u.email_user('Nouveau mot de passe eDemo.fr', message)
             # auto log user
             backend = get_backends()[0]
             u.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
@@ -102,8 +102,8 @@ def lostpassword(request):
             u = User.objects.get(email = request.POST['email'])
             token = user_token(u)
             link = '%s/apps/login/resetpassword?a=%s&t=%s' % (settings.HOST, u.pk, token)
-            message = u'Vous avez demandé à réinitialiser votre mot de passe EasyDemo.\n\nCliquez ici pour le réinitialiser : %s\n\n%s\n\nOrigine de la demande : %s' % (link, settings.HOST, request.META.get('REMOTE_ADDR', '?'))
-            u.email_user('Mot de passe EasyDemo', message)
+            message = u'Vous avez demandé à réinitialiser votre mot de passe eDemo.fr.\n\nCliquez ici pour le réinitialiser : %s\n\n%s\n\nOrigine de la demande : %s' % (link, settings.HOST, request.META.get('REMOTE_ADDR', '?'))
+            u.email_user('Mot de passe eDemo', message)
             return utils.JsonSuccess()  
         except:
             return utils.JsonError("Email inconnu")  
