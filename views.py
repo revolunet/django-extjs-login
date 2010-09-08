@@ -67,7 +67,7 @@ def changepassword(request):
             if request.user.email:
                 try:
                     message = _(u'Votre mot de passe a été réinitialisé :') + ' %s \n\n%s' % (newpass1, settings.HOST) 
-                    request.user.email_user(_( 'Nouveau mot de passe')), message)
+                    request.user.email_user(_( 'Nouveau mot de passe'), message)
                 except:
                     pass
             return utils.JsonSuccess()
