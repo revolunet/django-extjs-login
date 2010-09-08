@@ -104,9 +104,9 @@ def lostpassword(request):
             link = '%s/apps/login/resetpassword?a=%s&t=%s' % (settings.HOST, u.pk, token)
             message = _(u'Vous avez demandé à réinitialiser votre mot de passe.\n\nCliquez ici pour le réinitialiser')
             message += '%s\n\n%s\n\nfrom : %s' % (link, settings.HOST, request.META.get('REMOTE_ADDR', '?'))
-            u.email_user( u('Nouveau mot de passe'), message)
+            u.email_user( _('Nouveau mot de passe'), message)
             return utils.JsonSuccess()  
         except:
-            return utils.JsonError(u("Email inconnu"))  
+            return utils.JsonError(_("Email inconnu"))  
     
     return HttpResponseRedirect('/')

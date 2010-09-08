@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-08 16:21+0200\n"
+"POT-Creation-Date: 2010-09-08 18:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr "Bad user or password"
 msgid "Votre mot de passe a été réinitialisé :"
 msgstr "Your password has been resetted"
 
-#: views.py:70 views.py:90
+#: views.py:70 views.py:90 views.py:107
 msgid "Nouveau mot de passe"
 msgstr "New password"
 
@@ -49,3 +49,7 @@ msgstr ""
 "You asked to reset your password.\n"
 "\n"
 "Click here to do so"
+
+#: views.py:110
+msgid "Email inconnu"
+msgstr "Unknown email"
