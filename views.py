@@ -66,7 +66,7 @@ def changepassword(request):
             request.user.save()
             if request.user.email:
                 try:
-                    message = _(u'Votre mot de passe a été réinitialisé :') + ' %s \n\n%s' % (newpass1, settings.HOST) 
+                    message = _(u'Votre mot de passe a été réinitialisé : ') + ' %s \n\n%s' % (newpass1, settings.HOST) 
                     request.user.email_user(_( 'Nouveau mot de passe'), message)
                 except:
                     pass
@@ -86,7 +86,7 @@ def resetpassword(request):
             newpass =  User.objects.make_random_password(length=8)
             u.set_password(newpass)
             u.save()
-            message = _(u'Votre mot de passe a été réinitialisé') +' : %s \n\n%s' % (newpass, settings.HOST) 
+            message = _(u'Votre mot de passe a été réinitialisé ') +' : %s \n\n%s' % (newpass, settings.HOST) 
             u.email_user( _('Nouveau mot de passe'), message)
             # auto log user
             backend = get_backends()[0]
@@ -102,8 +102,8 @@ def lostpassword(request):
             u = User.objects.get(email = request.POST['email'])
             token = user_token(u)
             link = '%s/apps/login/resetpassword?a=%s&t=%s' % (settings.HOST, u.pk, token)
-            message = _(u'Vous avez demandé à réinitialiser votre mot de passe.\n\nCliquez ici pour le réinitialiser')
-            message += '%s\n\n%s\n\nfrom : %s' % (link, settings.HOST, request.META.get('REMOTE_ADDR', '?'))
+            message = _(u'Vous avez demandé à réinitialiser votre mot de passe.\n\nCliquez ici pour le réinitialiser ')
+            message += '%s\n\n%s\n\n%s : %s' % (link, settings.HOST, _(u'Demande effectuée depuis'), request.META.get('REMOTE_ADDR', '?'))
             u.email_user( _('Nouveau mot de passe'), message)
             return utils.JsonSuccess()  
         except:
