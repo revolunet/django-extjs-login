@@ -31,7 +31,7 @@ Ext.ux.EasyLogin = Ext.extend(Ext.form.FormPanel, {
 
     }
 
-    ,initComponent:function() {
+    ,initComponent(...args) {
 
     this.submitButton = new Ext.Button({
          text:"v&eacute;rifier"
@@ -58,7 +58,7 @@ Ext.ux.EasyLogin = Ext.extend(Ext.form.FormPanel, {
         ,value:this.username
         ,listeners:{
                 scope:this,
-                specialkey:function(f,o){
+                specialkey(f, o) {
                     if(o.getKey()==13){
                         
                         //console.log(this, f, o);
@@ -75,7 +75,7 @@ Ext.ux.EasyLogin = Ext.extend(Ext.form.FormPanel, {
         ,value:''
         ,listeners:{
                 scope:this,
-                specialkey:function(f,o){
+                specialkey(f, o) {
                     if(o.getKey()==13){
                         
                         //console.log(this, f, o);
@@ -87,7 +87,7 @@ Ext.ux.EasyLogin = Ext.extend(Ext.form.FormPanel, {
 	    }]
 	});
 
-	Ext.ux.EasyLogin.superclass.initComponent.apply(this, arguments);
+	Ext.ux.EasyLogin.superclass.initComponent.apply(this, args);
     
     
     
@@ -102,14 +102,14 @@ Ext.ux.EasyLogin = Ext.extend(Ext.form.FormPanel, {
      }) 
      
     }
-    ,resetPassword:function(btn) {
+    ,resetPassword(btn) {
         Ext.Msg.prompt("votre email", "Saisissez votre email", function(btn, email) {
             if(btn == 'ok') {
                  Ext.Ajax.request({
                     url:'/apps/login/lostpassword',
-                    params: {email: email},
+                    params: {email},
                     scope:this,
-                    success: function(response) {
+                    success(response) {
                         json = Ext.decode(response.responseText)
                         if (json.success) {
                             
@@ -131,7 +131,7 @@ Ext.ux.EasyLogin = Ext.extend(Ext.form.FormPanel, {
                         }
                        
                     }
-                    ,failure:function() {
+                    ,failure() {
                            Ext.Msg.show({
                                title:'Erreur',
                                msg: 'Impossible',
@@ -146,7 +146,7 @@ Ext.ux.EasyLogin = Ext.extend(Ext.form.FormPanel, {
         }, this)
     
     }
-    ,submitLogin:function(btn) {
+    ,submitLogin(btn) {
       //  this.submitButton = btn;
         this.submitButton.disable();
         this.submitButton.setIconClass("icon-loading");
@@ -160,7 +160,7 @@ Ext.ux.EasyLogin = Ext.extend(Ext.form.FormPanel, {
         });
     }
 
-    ,submitLoginCallback:function(form, action) {
+    ,submitLoginCallback(form, action) {
         
         var json = Ext.decode(action.response.responseText);
         //alert(json);
@@ -169,7 +169,7 @@ Ext.ux.EasyLogin = Ext.extend(Ext.form.FormPanel, {
         else this.error(form, json);
         }
 				  
-    ,error:function(form, json) {
+    ,error(form, json) {
         //console.log(json);
         Ext.Msg.show({
             buttons: Ext.Msg.OK,

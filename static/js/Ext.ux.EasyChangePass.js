@@ -5,7 +5,7 @@ Ext.ux.EasyChangePass = Ext.extend(Ext.Panel, {
       // title: 'Change password'
       // ,iconCls: 'icon-key'
         border:false
-        ,initComponent:function() {
+        ,initComponent(...args) {
                                 
                     this.form_change_pass = new Ext.FormPanel({
                       waitMsgTarget: true
@@ -50,7 +50,7 @@ Ext.ux.EasyChangePass = Ext.extend(Ext.Panel, {
                             ,listeners: {
                                 scope:this
                                 ,'click': {
-                                    fn: function(button, e) {
+                                    fn(button, e) {
                                         var formpanel = button.findParentByType('form');
                                         var form = formpanel.getForm();
                                         form.el.mask('Loading...');
@@ -58,12 +58,12 @@ Ext.ux.EasyChangePass = Ext.extend(Ext.Panel, {
                                              url: '/apps/login/changepassword'
                                             ,method: 'POST'
                                             ,scope: this
-                                            ,success: function(form, action) { 
+                                            ,success(form, action) { 
                                                 Ext.Msg.alert("Success", "Le mot de passe a été changé avec succès");  
                                                 console.log(this);
                                                 this.fireEvent('submitSuccess');
                                                 }
-                                            ,failure: function(form, action) {  form.el.unmask(); Ext.Msg.alert("Failure", action.result.msg);}
+                                            ,failure(form, action) {  form.el.unmask(); Ext.Msg.alert("Failure", action.result.msg);}
                                                 });
                                             }   
                                         }
@@ -81,7 +81,7 @@ Ext.ux.EasyChangePass = Ext.extend(Ext.Panel, {
                     // ,items:this.form_change_pass
                       // })
 
-            Ext.ux.EasyChangePass.superclass.initComponent.apply(this, arguments);
+            Ext.ux.EasyChangePass.superclass.initComponent.apply(this, args);
             
              this.addEvents(['submitSuccess']);
             }
